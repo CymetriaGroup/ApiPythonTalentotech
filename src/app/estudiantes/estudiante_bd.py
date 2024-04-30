@@ -172,7 +172,7 @@ class Estudiante():
             print(e)
             return False
 
-    @staticmethod
+    #@staticmethod
     def estudianteYaEnCurso(id_estudiante, id_curso):
         try:
             conexion = obtener_conexion()
@@ -184,4 +184,19 @@ class Estudiante():
         except Exception as e:
             print(e)
             return False
+
+    @staticmethod
+    def estudianteYaEnCurso(id_estudiante, id_curso):
+        try:
+            conexion = obtener_conexion()
+            with conexion.cursor() as cursor:
+                consulta = """SELECT id, estado FROM estado_curso_estudiante WHERE idEstudiante = %s AND idCurso = %s"""
+                cursor.execute(consulta, (id_estudiante, id_curso))
+                resultado = cursor.fetchone()
+
+            return resultado and resultado['estado'] == 1
+
+        except Exception as e:
+            print(e)
+        return False
            

@@ -6,6 +6,7 @@ from .estudiante_bd import Estudiante
 
 estudiantes = Blueprint('estudiantes', __name__)
 
+
 # Este endpoint sube los estudiantes sin asignar a un curso
 @estudiantes.route('/estudiantes-excel', methods=['POST'])
 def estudiantes_excel():
@@ -126,8 +127,7 @@ def estudiantes_excel_curso():
         return {"ok": False, "message": "Ningún estudiante fue guardado"} , 400
 
 # Este endpoint asigna estudiantes a un curso
-#Modificar función donde tendra que validar si el usuario esta asignado a un curso o no (si esta asignado no lo deja inscribirse, si no lo esta lo deja inscribirse) estado 1=inscrito, estado 0= no inscrito. Con el id_estudiante comprobar el estado del estudiante.
-
+#Modficar función donde tendra que validar si el usuario esta asignado a aotro curso directamente no dejarlo estado para validar si esta matriculado es que es estado este en 1(true) & 0 (false).
 @estudiantes.route('/asignar-estudiantes-curso-excel', methods=['POST'])
 def asignar_estudiantes_curso_excel():
     if 'file' not in request.files:
